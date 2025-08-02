@@ -1,7 +1,7 @@
 # Fedorable KDE - Kịch bản Tự động hóa sau Cài đặt
 
 [![Giấy phép: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Phiên bản](https://img.shields.io/badge/version-1.1.0-blue.svg)](https://github.com/hkg2710/Fedorable-KDE-Plasma-Version)
+[![Phiên bản](https://img.shields.io/badge/version-1.3.0-blue.svg)](https://github.com/hkg2710/Fedorable-KDE-Plasma-Version)
 ![Hỗ trợ Fedora](https://img.shields.io/badge/Fedora-51A2DA?logo=fedora&logoColor=white)
 
 Đây là một kịch bản shell tự động hóa hoàn toàn, được thiết kế để thiết lập một môi trường làm việc hiệu quả và đẹp mắt trên bản cài đặt mới của **Fedora KDE Spin**.
@@ -12,27 +12,30 @@ Kịch bản sẽ thực hiện tất cả các tác vụ tẻ nhạt sau khi c�
 
 Kịch bản sẽ tự động thực hiện các tác vụ sau:
 
-*   **🚀 Tăng tốc DNF**: Cấu hình DNF để cho phép tải xuống 10 gói song song, giúp tăng tốc độ cài đặt và cập nhật.
-*   **📦 Kích hoạt kho lưu trữ**: Tự động thêm và kích hoạt các kho lưu trữ thiết yếu:
-    *   RPM Fusion (free và non-free)
-    *   RPM Fusion (tainted)
-    *   Kho lưu trữ Terra
-*   **🎶 Cài đặt Codec & Công cụ**: Cài đặt codec đa phương tiện (ffmpeg, gstreamer) và các công cụ dòng lệnh cần thiết (git, curl, wget...).
-*   **⬆️ Cập nhật Hệ thống**: Thực hiện cập nhật toàn bộ hệ thống sau khi đã thêm các kho lưu trữ mới.
-*   **💎 Cài đặt Zsh & Starship**:
-    *   Cài đặt Zsh và đặt làm shell mặc định.
-    *   Cài đặt các plugin hữu ích: `zsh-autosuggestions`, `zsh-syntax-highlighting`, `zsh-completions`.
-    *   Cài đặt Starship, một prompt đa nền tảng, và áp dụng giao diện `catppuccin-powerline` đẹp mắt.
-*   **🔤 Cài đặt Font Lập trình**: Tự động tải và cài đặt **Fira Code Nerd Font**, một font chữ tuyệt vời cho việc lập trình và terminal.
-*   **🧩 Thiết lập Flathub**: Thêm kho lưu trữ Flathub để dễ dàng cài đặt các ứng dụng Flatpak.
-*   **⚙️ Cập nhật Firmware**: Kiểm tra và cài đặt các bản cập nhật firmware cho phần cứng của bạn.
-*   **🧹 Tự động dọn dẹp**: Sau khi chạy xong, kịch bản sẽ tự động xóa chính nó và tệp log để giữ hệ thống sạch sẽ.
+*   **🚀 Tăng tốc DNF**: Cấu hình DNF để cho phép tải xuống 10 gói song song.
+*   **📦 Kích hoạt kho lưu trữ**: Tự động thêm và kích hoạt RPM Fusion (free, non-free, tainted) và Terra.
+*   **🎶 Cài đặt Codec & Công cụ**: Cài đặt codec đa phương tiện và các công cụ dòng lệnh cần thiết (git, curl, wget...).
+*   **⬆️ Cập nhật Hệ thống**: Thực hiện cập nhật toàn bộ hệ thống sau khi đã thêm kho lưu trữ.
+*   **💎 Cài đặt Zsh & Starship**: Cài đặt Zsh, đặt làm shell mặc định, và cấu hình với các plugin hữu ích cùng prompt Starship (giao diện Catppuccin).
+*   **🔤 Cài đặt Font Lập trình**: Tự động tải và cài đặt **Fira Code Nerd Font**.
+*   **🧩 Thiết lập Flathub**: Thêm kho lưu trữ Flathub cho các ứng dụng Flatpak.
+*   **⚙️ Cập nhật Firmware**: Kiểm tra và cài đặt các bản cập nhật firmware cho phần cứng.
+*   **🧹 Tự động dọn dẹp**: Sau khi chạy xong, kịch bản sẽ tự động xóa chính nó và tệp log.
 
 ## 📋 Yêu cầu
 
 *   Một bản cài đặt mới của **Fedora KDE Spin** (khuyến nghị phiên bản 40 trở lên).
 *   Kết nối Internet.
-*   Quyền `sudo` (kịch bản sẽ tự kiểm tra).
+*   Quyền `sudo`.
+
+## 🔧 Chuẩn bị: Cài đặt công cụ tải về
+
+Để tải kịch bản này, bạn sẽ cần `curl` hoặc `wget`. Hầu hết các bản cài đặt Fedora đã có sẵn chúng. Tuy nhiên, để đảm bảo chắc chắn, bạn có thể chạy lệnh sau để cài đặt cả hai:
+
+```bash
+sudo dnf install -y curl wget
+```
+Thao tác này sẽ cài đặt các công cụ còn thiếu, đảm bảo các lệnh ở bước tiếp theo sẽ hoạt động.
 
 ## 🚀 Cách sử dụng
 
@@ -43,19 +46,27 @@ Bạn có thể chạy kịch bản này bằng một trong hai cách sau:
 
 ### Cách 1: Nhanh gọn (One-Liner)
 
-Mở terminal (Konsole) và dán lệnh sau:
+Cách này sử dụng `curl` và tiện lợi nhất. Mở terminal (Konsole) và dán lệnh sau:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/hkg2710/Fedorable-KDE-Plasma-Version/main/fedorable-kde-auto.sh | sudo bash
 ```
+*(Giả sử tên file của bạn là `fedorable-kde-auto.sh` và nằm ở nhánh `main`)*
 
 ### Cách 2: An toàn hơn (Khuyến khích)
 
 Cách này cho phép bạn xem lại kịch bản trước khi chạy.
 
 1.  **Tải kịch bản về:**
+    
+    *Sử dụng `curl`:*
     ```bash
-    wget https://raw.githubusercontent.com/hkg2710/Fedorable-KDE-Plasma-Version/main/fedorable-kde-auto.sh
+    curl -o fedorable-kde-auto.sh -L https://raw.githubusercontent.com/hkg2710/Fedorable-KDE-Plasma-Version/main/fedorable-kde-auto.sh
+    ```
+
+    *Hoặc sử dụng `wget`:*
+    ```bash
+    wget -O fedorable-kde-auto.sh https://raw.githubusercontent.com/hkg2710/Fedorable-KDE-Plasma-Version/main/fedorable-kde-auto.sh
     ```
 
 2.  **(Tùy chọn nhưng khuyến khích) Đọc nội dung kịch bản:**
